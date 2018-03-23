@@ -1,4 +1,4 @@
-#' Collect Direct Observation Data
+#' Collect direct observation data
 #'
 #' @return A data frame of observation data
 #' @export
@@ -11,6 +11,8 @@ data_collection_program <- function(){
 
     # Initialize
 
+    id <-
+      dlgInput(message = 'Enter the participant ID', default = '000')$res
     timestamps      <- NULL
     activities      <- NULL
     descriptions    <- NULL
@@ -24,25 +26,32 @@ data_collection_program <- function(){
         c(auto_timestamps, as.character(Sys.time()))
 
       new_timestamp <-
-        dlgInput(message = 'Record the start time of the event. Press enter for current time.',
+        dlgInput(
+          message = 'Record the start time of the event.
+            Press enter for current time.',
           default = Sys.time())$res
 
       if(length(new_timestamp)==0) new_timestamp <- ''
       timestamps <- c(timestamps, new_timestamp)
 
       new_activity <-
-        dlgInput(message = paste('Enter label for activity',
-          length(timestamps)))$res
+        dlgInput(
+          message = paste('Enter label for activity',
+            length(timestamps)))$res
 
       if(length(new_activity)==0) new_activity   <- ''
       activities <- c(activities, new_activity)
 
-      descriptions <- rbind(descriptions, tree.intensity())
+      descriptions <- rbind(descriptions, tree_intensity())
 
       pauser <-
-        dlgInput(message = 'Press Enter when the next activity begins. Press cancel to quit.',
+        dlgInput(
+          message = 'Press Enter when the next activity begins.
+          Press cancel to quit.',
           default = 'Enter for next activity. Cancel to quit')$res
-      n                                          <- n+1
+
+      n <- n+1
+
       if(length(pauser)==0) {
         finish <-
           if(n>1) {
@@ -60,14 +69,17 @@ data_collection_program <- function(){
 
     diff_s <-
       if (n > 1){
-        (finish - get.minofday.rat(timestamps)) * 60
+        (finish -
+            TwoRegression:::get_minute(timestamps,
+              rational = TRUE)) * 60
       } else{
       ''
       }
 
     backup_timestamps <-
-      get.minofday.rat(ifelse(timestamps == '',
-        auto_timestamps, timestamps))
+      TwoRegression:::get_minute(
+        ifelse(timestamps == '', auto_timestamps, timestamps),
+        rational = TRUE)
 
     backup_finish <-
       if (n>1) {
@@ -80,15 +92,15 @@ data_collection_program <- function(){
     backup_diff_s <- (backup_finish - backup_timestamps)*60
 
     minofday <-
-      get.minofday.rat(ifelse(timestamps=='',
-        auto_timestamps, timestamps))
+      TwoRegression:::get_minute(
+        ifelse(timestamps=='', auto_timestamps, timestamps),
+        rational = TRUE)
 
     dayofyear <-
-      get.dayofyear(ifelse(timestamps=='',
-        auto_timestamps, timestamps))
+      TwoRegression:::get_day_of_year(
+        ifelse(timestamps=='', auto_timestamps, timestamps))
 
-
-    data <-
+    all_data <-
       data.frame(User_Timestamp = timestamps,
         Auto_Timestamp = auto_timestamps,
         dayofyear = dayofyear,
@@ -98,23 +110,20 @@ data_collection_program <- function(){
         auto_duration_s = backup_diff_s,
         stringsAsFactors = FALSE)
 
-    data <- cbind(data,descriptions)
+    all_data <- cbind(data,descriptions)
 
+    all_data$id <- id
+    all_data <- all_data[ ,c("id", setdiff(names(all_data), "id"))]
     return(data)
     }
 
 ### FUNCTIONS CALLED BY PROGRAM
 
-  get.dayofyear <- function(date, format = '%Y-%m-%d %H:%M:%S'){
-    as.integer(strftime(as.POSIXlt(date, format = format), format = '%j'))}
-
-  get.minofday.rat <- function(date, format = '%Y-%m-%d %H:%M:%S'){
-    as.integer(strftime(as.POSIXlt(date, format = format), format = '%H'))*60 +
-      as.integer(strftime(as.POSIXlt(date, format = format), format = '%M')) +
-      as.integer(strftime(as.POSIXlt(date, format = format), format = '%S'))/60
-  }
-
-  tree.intensity <- function(){
+#' Pre-classify activity intensity
+#'
+#' @keywords internal
+#'
+tree_intensity <- function(){
 
     ## Initialize
     seated               <- 'cancel'
@@ -128,67 +137,113 @@ data_collection_program <- function(){
     #### DECISION TREE ####
     repeat{
 
-      #-----------------------------------------------------------------------------------#
-
       seated               <- dlgMessage('Seated?','yesnocancel',)$res
       if(seated=='cancel') break
 
-      #-----------------------------------------------------------------------------------#
-
       large_muscles_moving <- dlgMessage('Large Muscles Contracting?','yesnocancel')$res
 
-      if(large_muscles_moving=='cancel')                                      break
-      if(seated=='yes'&large_muscles_moving=='no') {Intensity <- 'Sedentary' ; break}
-      if(seated=='no'&large_muscles_moving=='no')  {Intensity <- 'Light'     ; break}
-
-      #-----------------------------------------------------------------------------------#
-
-      slow                 <- dlgMessage('Slow?','yesnocancel')$res
-
-      if(slow=='cancel')                                                       break
-      if(seated=='yes'&large_muscles_moving=='yes'&slow=='no')                 break
-
-      #-----------------------------------------------------------------------------------#
-      if(slow=='yes'){
-      slowed_by_resistance <- dlgMessage('Slowed by resistance?','yesnocancel')$res
-
-      if(slowed_by_resistance=='cancel')                                       break
-      if(seated=='yes'&large_muscles_moving=='yes'&slow=='yes'&
-           slowed_by_resistance=='no')       {Intensity <- 'Sedentary/Light' ; break}
-      if(seated=='yes'&large_muscles_moving=='yes'&slow=='yes'&
-           slowed_by_resistance=='yes')      {Intensity <- 'Light/Moderate'  ; break}
-      if(seated=='no'&large_muscles_moving=='yes'&slow=='yes'&
-           slowed_by_resistance=='no')       {Intensity <- 'Light'           ; break}
-      if(seated=='no'&large_muscles_moving=='yes'&slow=='yes'&
-           slowed_by_resistance=='yes')      {Intensity <- 'Light/Moderate'  ; break}
+      if (large_muscles_moving=='cancel') break
+      if (seated=='yes'&large_muscles_moving=='no') {
+        Intensity <- 'Sedentary'
+        break
       }
 
-      #-----------------------------------------------------------------------------------#
+      if (seated=='no'&large_muscles_moving=='no') {
+        Intensity <- 'Light'
+        break
+      }
 
-      ambulation           <- dlgMessage('Ambulation?','yesnocancel')$res
+      slow <-
+        dlgMessage('Slow?','yesnocancel')$res
 
-      if(ambulation=='cancel')                                                break
-      if(seated=='no'&large_muscles_moving=='yes'&slow=='no'&
-           ambulation=='no')                 {Intensity <- 'Light/Moderate'  ; break}
+      if (slow=='cancel') break
+      if (seated=='yes'&large_muscles_moving=='yes'&slow=='no') break
 
-      #-----------------------------------------------------------------------------------#
+      if (slow=='yes') {
+      slowed_by_resistance <-
+        dlgMessage('Slowed by resistance?','yesnocancel')$res
 
-      light_walking        <- dlgMessage('Walking speed resembles pacing?','yesnocancel')$res
-      if(light_walking=='no')                {Intensity <- 'MVPA'            ; break}
-      if(light_walking=='yes')               {Intensity <- 'Light'           ; break}
+      if(slowed_by_resistance=='cancel') break
+      if(seated=='yes'&large_muscles_moving=='yes'&slow=='yes'&
+           slowed_by_resistance=='no') {
+        Intensity <- 'Sedentary/Light'
+        break
+      }
+      if (seated=='yes'&large_muscles_moving=='yes'&slow=='yes'&
+           slowed_by_resistance=='yes') {
+        Intensity <- 'Light/Moderate'
+        break
+      }
+      if (seated=='no'&large_muscles_moving=='yes'&slow=='yes'&
+           slowed_by_resistance=='no') {
+        Intensity <- 'Light'
+        break
+      }
+      if (seated=='no'&large_muscles_moving=='yes'&slow=='yes'&
+           slowed_by_resistance=='yes') {
+        Intensity <- 'Light/Moderate'
+        break
+      }
+      }
+
+      ambulation <-
+        dlgMessage('Ambulation?','yesnocancel')$res
+
+      if (ambulation=='cancel') break
+      if (seated=='no'&large_muscles_moving=='yes'&slow=='no'&
+           ambulation=='no') {
+        Intensity <- 'Light/Moderate'
+        break
+      }
+
+      light_walking <-
+        dlgMessage('Walking speed resembles pacing?','yesnocancel')$res
+      if (light_walking=='no') {
+        Intensity <- 'MVPA'
+        break
+      }
+      if (light_walking=='yes') {
+        Intensity <- 'Light'
+        break
+      }
       break
     }
 
 
-    latest_description <- data.frame(Tree_Intensity = Intensity, seated, large_muscles_moving,slow,slowed_by_resistance,ambulation,light_walking, stringsAsFactors = F)
-    if(length(which(latest_description=='cancel'))!=0) latest_description[,match('cancel',latest_description):length(latest_description)] <- NA
-    return(latest_description)}
+    latest_description <-
+      data.frame(
+        Tree_Intensity = Intensity,
+        seated,
+        large_muscles_moving,
+        slow,
+        slowed_by_resistance,
+        ambulation,
+        light_walking,
+        stringsAsFactors = F
+      )
 
+    if (length(which(latest_description=='cancel'))!=0) {
+      latest_description[ ,match('cancel',
+        latest_description):length(latest_description)] <- NA
+    }
+    return(latest_description)
+  }
 
-
-
-
-compendium.reference <- function(data){
+#' Consult
+#' \href{https://sites.google.com/site/compendiumofphysicalactivities/}{Compendium
+#' of Physical Activities} to Encode Direct Observation Intensities
+#'
+#' @param data A data frame outputted from \code{\link{data_collection_program}}
+#'
+#' @return A data frame fully annotated with intensity values
+#' @export
+#'
+#' @examples
+#' \dontrun{
+#' observation_data <- data_collection_program()
+#' compendium_reference(observation_data)
+#' }
+compendium_reference <- function(data){
 
 ### Load and code
     load('2011 Compendium.RData', globalenv())

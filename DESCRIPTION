@@ -12,4 +12,6 @@ Description: Two-part system for first collecting then managing direct
 License: GPL3 | file LICENSE
 Encoding: UTF-8
 LazyData: true
-Imports: svDialogs (>= 0.9.57)
+Imports: svDialogs (>= 0.9.57),
+    TwoRegression (>= 0.1.2)
+RoxygenNote: 6.0.1

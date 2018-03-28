@@ -19,7 +19,7 @@ behaviors using direct observation
 
 \section{Associated References}{
 
-Hibbing PR, Ellingson LD, Dixon PM, & Welk GJ (2017). Adapted Sojourn Models 
+Hibbing PR, Ellingson LD, Dixon PM, & Welk GJ (2017). Adapted Sojourn Models
 to Estimate Activity Intensity in Youth: A Suite of Tools. \emph{Medicine and
 Science in Sports and Exercise}. Advance online publication.
 doi:10.1249/MSS.0000000000001486

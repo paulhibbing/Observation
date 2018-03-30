@@ -53,13 +53,17 @@ data_collection_program <- function(){
       n <- n+1
 
       if(length(pauser)==0) {
-        finish <-
-          if(n>1) {
-            c(get.minofday.rat(timestamps[2:length(timestamps)]),
-              get.minofday.rat(Sys.time()))
-          } else {
-          ''
-          }
+        finish <- Sys.time()
+        #   if(n>1) {
+        #     c(
+        #       TwoRegression:::get_minute(timestamps[2:length(timestamps)],
+        #         rational = TRUE),
+              # TwoRegression:::get_minute(Sys.time(),
+              #   rational = TRUE)
+        #     )
+        #   } else {
+        #   ''
+        #   }
         break
       }
 
@@ -68,28 +72,31 @@ data_collection_program <- function(){
     # Cleanup
 
     diff_s <-
-      if (n > 1){
-        (finish -
-            TwoRegression:::get_minute(timestamps,
-              rational = TRUE)) * 60
-      } else{
-      ''
-      }
+      as.numeric(diff.POSIXt(c(as.POSIXct(timestamps), finish)))
+      # if (n > 1){
+      #   (finish -
+      #       TwoRegression:::get_minute(timestamps,
+      #         rational = TRUE)) * 60
+      # } else{
+      # ''
+      # }
 
     backup_timestamps <-
-      TwoRegression:::get_minute(
-        ifelse(timestamps == '', auto_timestamps, timestamps),
-        rational = TRUE)
+      # TwoRegression:::get_minute(
+        ifelse(timestamps == '', auto_timestamps, timestamps)
+        # rational = TRUE)
 
-    backup_finish <-
-      if (n>1) {
-      c(backup_timestamps[2:length(backup_timestamps)],
-        finish[length(finish)])
-      } else {
-        ''
-      }
+    backup_diff_s <- ##Previously named backup_finish
+      as.numeric(diff.POSIXt(c(as.POSIXct(backup_timestamps), finish)))
+      # if (n>1) {
+      # c(backup_timestamps[2:length(backup_timestamps)],
+      #   finish[length(finish)])
+      # } else {
+      #   ''
+      # }
 
-    backup_diff_s <- (backup_finish - backup_timestamps)*60
+    # backup_diff_s <-
+    #   abs((backup_finish - diff_s))#*60
 
     minofday <-
       TwoRegression:::get_minute(
@@ -110,16 +117,22 @@ data_collection_program <- function(){
         auto_duration_s = backup_diff_s,
         stringsAsFactors = FALSE)
 
-    all_data <- cbind(data,descriptions)
+    all_data <- cbind(all_data,descriptions)
 
     all_data$id <- id
     all_data <- all_data[ ,c("id", setdiff(names(all_data), "id"))]
-    return(data)
+    return(all_data)
     }
 
 ### FUNCTIONS CALLED BY PROGRAM
 
 #' Pre-classify activity intensity
+#'
+#' This is the decision tree to pre-classify intensity.
+#' See the Figure at the end of Supplemental Document 3 from
+#' \href{
+#' http://links.lww.com/MSS/B103}{Hibbing et al.
+#' (2018, *Med Sci Sports Exerc*)}. NOTE: The link will download the document.
 #'
 #' @keywords internal
 #'
@@ -137,10 +150,11 @@ tree_intensity <- function(){
     #### DECISION TREE ####
     repeat{
 
-      seated               <- dlgMessage('Seated?','yesnocancel',)$res
+      seated <- dlgMessage('Seated?','yesnocancel')$res
       if(seated=='cancel') break
 
-      large_muscles_moving <- dlgMessage('Large Muscles Contracting?','yesnocancel')$res
+      large_muscles_moving <-
+        dlgMessage('Large Muscles Contracting?','yesnocancel')$res
 
       if (large_muscles_moving=='cancel') break
       if (seated=='yes'&large_muscles_moving=='no') {
@@ -243,159 +257,226 @@ tree_intensity <- function(){
 #' observation_data <- data_collection_program()
 #' compendium_reference(observation_data)
 #' }
-compendium_reference <- function(data){
+compendium_reference <- function(obs_data){
 
-### Load and code
-    load('2011 Compendium.RData', globalenv())
+    agegroup_setting <-
+      dlgMessage('Will you be coding for kids?', 'yesno')$res
+    category_setting <-
+      dlgMessage('Will you be coding with MVPA as one category?', 'yesno')$res
 
-    agegroup_setting = dlgMessage('Will you be coding for kids?', 'yesno')$res
-    category_setting = dlgMessage('Will you be coding with MVPA as one category?', 'yesno')$res
-
-    breaks        = c(0, 1.5, 3, 6, Inf)
-    childbreaks   = c(0, 2,   4, 6, Inf)
+    breaks <- c(0, 1.5, 3, 6, Inf)
+    childbreaks <- c(0, 2,   4, 6, Inf)
 
     if(category_setting=='yes'){
       breaks      = breaks[-4]
       childbreaks = childbreaks[-4]
     }
 
-    labels         = c('Sedentary', 'Light', 'Moderate','Vigorous')
-    threecatlabels = c('Sedentary', 'Light', 'MVPA')
+    labels <- c('Sedentary', 'Light', 'Moderate','Vigorous')
+    threecatlabels <- c('Sedentary', 'Light', 'MVPA')
 
-    compendium$Intensity <- cut(compendium$METS, breaks = if(agegroup_setting=='yes') childbreaks    else breaks,
-                                labels = if(category_setting=='yes') threecatlabels else labels,
-                                right = FALSE)
+    compendium$Intensity <-
+      cut(compendium$METS,
+        breaks = if(agegroup_setting=='yes') childbreaks    else breaks,
+        labels = if(category_setting=='yes') threecatlabels else labels,
+        right = FALSE)
 
-    levels = levels(compendium$Intensity)
+    levels <- levels(compendium$Intensity)
 
-    data$Tree_Intensity <- gsub('Moderate', 'MVPA', data$Tree_Intensity)  # Move these to the actual program
-    data$Tree_Intensity <- gsub('Vigorous', 'MVPA', data$Tree_Intensity)
+    obs_data$Tree_Intensity <-
+      gsub('Moderate', 'MVPA', obs_data$Tree_Intensity)
+        # ^^Move these to the actual program
 
-    compendium <- compendium[with(compendium, order(Intensity, Activity)),]
+    obs_data$Tree_Intensity <-
+      gsub('Vigorous', 'MVPA', obs_data$Tree_Intensity)
 
-### Is this the first time the data are being coded?
+    compendium <-
+      compendium[with(compendium, order(Intensity, Activity)),]
+
+    ### Is this the first time the data are being coded?
     firstloop    <- TRUE
-    if(sum(grepl('Final_Intensity' , names(data)))>0){
+    if(sum(grepl('Final_Intensity' , names(obs_data)))>0){
       firstloop  <- FALSE
-      completed  <- data$Final_Intensity %in% levels
-      oldentries <- data[completed, ]
-      data       <- data[!completed, ]
+      completed  <- obs_data$Final_Intensity %in% levels
+      oldentries <- obs_data[completed, ]
+      obs_data       <- obs_data[!completed, ]
     }
 
-### Find possible matches based on Activity description
-    correct_intensity <- data$Tree_Intensity %in% levels
+    ### Find possible matches based on Activity description
+    correct_intensity <- obs_data$Tree_Intensity %in% levels
 
-    incorrect_entries   <- strsplit(data$Activity[!correct_intensity], ' ')
-    incorrect_entries   <- lapply(incorrect_entries, function(x) gsub('ing','',x))
-    incorrect_entries   <- lapply(incorrect_entries, function(x) gsub('ed','',x))
+    incorrect_entries <-
+      strsplit(obs_data$Activity[!correct_intensity], ' ')
+    incorrect_entries <-
+      lapply(incorrect_entries, function(x) gsub('ing','',x))
+    incorrect_entries <-
+      lapply(incorrect_entries, function(x) gsub('ed','',x))
 
-    incorrect_entries   <- lapply(incorrect_entries, function(x){
+    incorrect_entries <-
+      lapply(incorrect_entries, function(x){
       matches <- unlist(lapply(x, function(y){
         which(grepl(y, compendium$Activity, ignore.case = T))}))
 
       test <- if(sum(matches)==0) compendium else compendium[matches,]
       return(test)
-    }
-    ) ### This returns a data frame for each observation partition with a short list of
-    ### possible corresponding compendium activities based solely on primitive string matching
+    })
+    ### This returns a data frame for each observation partition with a short
+    ### list of possible corresponding compendium activities based solely on
+    ### primitive string matching
 
-### Append tree intensity and original entry to each entry in the aforementioned list
-    incorrect_intensities <- data$Tree_Intensity[!correct_intensity]
+    ### Append tree intensity and original entry to each entry in the aforementioned list
+    incorrect_intensities <-
+      obs_data$Tree_Intensity[!correct_intensity]
     if(category_setting!='yes'){
       incorrect_intensities <- gsub('MVPA','Moderate Vigorous', incorrect_intensities)
     }
 
-    incorrect_activities  <- data$Activity[!correct_intensity]
+    incorrect_activities <-
+      obs_data$Activity[!correct_intensity]
 
-    incorrect_entries     <- mapply(function(x,y) {x$Tree_Intensity <- rep(incorrect_intensities[y], nrow(x))
-                                                   x$Original_Entry <- rep(incorrect_activities[y], nrow(x))
-                                                   return(x)},
-                                    x = incorrect_entries, y = seq_along(incorrect_intensities),SIMPLIFY = F)
+    incorrect_entries <-
+      mapply(
+        function(x,y) {
+          x$Tree_Intensity <-
+            rep(incorrect_intensities[y], nrow(x))
+          x$Original_Entry <-
+            rep(incorrect_activities[y], nrow(x))
+          return(x)},
+        x = incorrect_entries,
+        y = seq_along(incorrect_intensities),
+        SIMPLIFY = F)
 
     ### This is just a convoluted indexing call that gets a copy of the original tree
     ### intensity and the user-inputted activity description for every potential match
     ### from the compendium.
 
-### Remove possibilities outside the tree-designated range
-    incorrect_entries <- lapply(incorrect_entries, function(x) {
-      qualifies <- sapply(x$Intensity,
-                          function(y) grepl(y, x$Tree_Intensity[1],
-                                            ignore.case = T))
-      x         <- if(x$Tree_Intensity[1]!='Indeterminate') x[qualifies,] else x
+    ### Remove possibilities outside the tree-designated range
+    incorrect_entries <-
+      lapply(incorrect_entries, function(x) {
+    qualifies <-
+      sapply(x$Intensity,
+             function(y) grepl(y, x$Tree_Intensity[1], ignore.case = T))
+
+    x <-
+      if(x$Tree_Intensity[1]!='Indeterminate') x[qualifies,] else x
       return(x)
-    }
-    ) ### This is another sadly convoluted step. It just cleans up instances where the
+    })
+    ### This is another sadly convoluted step. It just cleans up instances where the
     ### tree said light/MVPA but a potential match with a sedentary activity was found
 
-### If all compendium possibilities are the same, set to that; otherwise, get help
-    incorrect_entries <- comp.lookup(incorrect_entries, Levels = levels, Compendium = compendium)
+    ### If all compendium possibilities are the same, set to that; otherwise, get help
+    incorrect_entries <-
+      comp_lookup(incorrect_entries,
+        Levels = levels)
 
+    ### Pull it all together
+    incorrect_entries <-
+      do.call(rbind, incorrect_entries)
+    obs_data$Final_Intensity <-
+      obs_data$Tree_Intensity
+    ### Initialize to tree value. Then we'll correct the ones that are wrong.
 
-### Pull it all together
-    incorrect_entries <- do.call(rbind, incorrect_entries)
-    data$Final_Intensity <- data$Tree_Intensity   ### Initialize to tree value. Then we'll correct the ones that are wrong.
-
-    data$Final_Intensity <- mapply(
-      function(x,y){
-        y <-  ifelse(x %in% incorrect_entries$Original_Entry,
-                     as.character(incorrect_entries$Final_Intensity[match(x, incorrect_entries$Original_Entry)]),
-                     y)
-        return(y)
-      },
-      x = data$Activity, y = data$Final_Intensity)
-rm(compendium, envir = globalenv())
+    obs_data$Final_Intensity <- mapply(function(x, y) {
+      y <-  ifelse(
+        x %in% incorrect_entries$Original_Entry,
+        as.character(
+          incorrect_entries$Final_Intensity[match(x,
+            incorrect_entries$Original_Entry)]
+          ),
+        y
+      )
+      return(y)
+    },
+      x = obs_data$Activity,
+      y = obs_data$Final_Intensity)
 
   if(!firstloop){
-    data <- rbind(oldentries, data)
+    obs_data <- rbind(oldentries, obs_data)
   }
 
-data$Final_Intensity <- factor(data$Final_Intensity, levels = levels)
-dlgMessage('Done Coding.', 'ok')
-return(data[order(data$Auto_Timestamp),])
-}
+  obs_data$Final_Intensity <- factor(obs_data$Final_Intensity, levels = levels)
+  dlgMessage('Done Coding.', 'ok')
+  return(obs_data[order(obs_data$Auto_Timestamp),])
+  }
 
-  #*******************************************************************************************#
-  #*******************************************************************************************#
-  #*******************************************************************************************#
+#' Helper function for intensity coding process.
+#'
+#' Interface for looking up Compendium values to assign an intensity to an
+#' activity.
+#'
+#' @param incorrect_entries A vector of activities that have not been correctly coded yet
+#' @param Levels A vector of intensity levels from which to select
+#'
+#' @keywords internal
+#'
+comp_lookup <- function(incorrect_entries, Levels){
+  lapply(incorrect_entries,
+    function(z){
+    keep <- 0
+    if(nrow(z)>1) keep <- sd(as.numeric(z$Intensity))
+    if(keep==0){
+      z$Final_Intensity <- z$Intensity
+      } else{
+        title <-
+          paste('Select closest match for: ',
+            toupper(z$Original_Entry[1]),
+            '. Press cancel if no matches are given.',
+            sep = '')
+      Activity <-
+        dlgList(with(z,
+          paste('Rating:',
+            Intensity,
+            '\n  ',
+            METS,'METs\n  ',
+            Activity)),
+            title = title)$res
 
-### Helper function for activity coding process
+      if(length(Activity)==0){
+        qualifies <- sapply(compendium$Intensity,
+          function(y) {
+            grepl(y, z$Tree_Intensity[1], ignore.case = T) |
+            z$Tree_Intensity[1]=='Indeterminate'}
+          )
 
+        Activity <-
+          dlgList(
+            paste(
+              'Rating:',
+              compendium$Intensity[qualifies],
+              '\n',
+              compendium$METS[qualifies],
+              'METs\n',
+              compendium$Activity[qualifies]
+            ),
+            title = 'You pressed cancel. Please select match from whole list.'
+          )$res
+        }
+      if (length(Activity)==0) {
+        message(
+          paste(
+            'No reference value selected for ',
+            toupper(z$Original_Entry[1]),
+            '. Returning original tree form.',
+            sep = ''
+          )
+        )
+        z$Final_Intensity <-
+          z$Tree_Intensity}
 
-comp.lookup <- function(incorrect_entries, Levels, Compendium = compendium){
-  lapply(incorrect_entries, function(z){
-                              keep <- 0
-                              if(nrow(z)>1) keep <- sd(as.numeric(z$Intensity))
+      if (length(Activity) != 0) {
+        comp_intensity <- unlist(strsplit(Activity, '\n'))
+        comp_intensity <-
+          comp_intensity[which(grepl('Rating', comp_intensity, ignore.case = T))]
+        comp_intensity <-
+          Levels[which(sapply(Levels, function(z)
+            grepl(z, comp_intensity, ignore.case = T)))]
 
-                              if(keep==0){
-                                z$Final_Intensity <- z$Intensity
-                              } else{
-                                title <- paste('Select closest match for: ', toupper(z$Original_Entry[1]),'. Press cancel if no matches are given.', sep = '')
-                                Activity <- dlgList(with(z, paste('Rating:',Intensity,'\n  ',METS,'METs\n  ',Activity)),
-                                                    title = title)$res
+        z$Final_Intensity <-
+          comp_intensity
+      }
+      }
 
-                                if(length(Activity)==0){
-                                  qualifies <- sapply(Compendium$Intensity,
-                                                      function(y) {
-                                                                   grepl(y, z$Tree_Intensity[1], ignore.case = T) |
-                                                                     z$Tree_Intensity[1]=='Indeterminate'})
-
-                                  Activity <- dlgList(paste('Rating:',Compendium$Intensity[qualifies],'\n',
-                                                            Compendium$METS[qualifies], 'METs\n',
-                                                            Compendium$Activity[qualifies]),
-                                                      title = 'You pressed cancel. Please select match from whole list.')$res}
-
-                                if(length(Activity)==0){message(paste('No reference value selected for ',toupper(z$Original_Entry[1]), '. Returning original tree form.', sep = ''))
-                                                        z$Final_Intensity <- z$Tree_Intensity}
-
-                                if(length(Activity)!=0){
-                                  comp_intensity <- unlist(strsplit(Activity, '\n'))
-                                  comp_intensity <- comp_intensity[which(grepl('Rating',comp_intensity, ignore.case = T))]
-                                  comp_intensity <- Levels[which(sapply(Levels, function(z) grepl(z, comp_intensity, ignore.case = T)))]
-
-                                  z$Final_Intensity <- comp_intensity}
-                              }
-
-              return(z[1,])
+    return(z[1, ])
             }
     )
 }

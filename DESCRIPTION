@@ -4,7 +4,8 @@ Title: Collect and Process Direct Observation Data
 Version: 0.1.0
 Authors@R: person(c("Paul", "R."), "Hibbing", email = "paulhibbing@gmail.com",
 		  role = c("aut","cre"))
-Depends: R (>= 2.10)
+Depends: R (>= 2.10),
+    svDialogs (>= 0.9.57)
 Maintainer: The package maintainer <yourself@somewhere.net>
 Description: Two-part system for first collecting then managing direct
     observation data, as described by Hibbing PR, Ellingson LD,
@@ -12,6 +13,5 @@ Description: Two-part system for first collecting then managing direct
 License: GPL3 | file LICENSE
 Encoding: UTF-8
 LazyData: true
-Imports: svDialogs (>= 0.9.57),
-    TwoRegression (>= 0.1.2)
+Imports: TwoRegression (>= 0.1.2)
 RoxygenNote: 6.0.1

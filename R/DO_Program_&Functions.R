@@ -56,9 +56,9 @@ data_collection_program <- function(){
         finish <- Sys.time()
         #   if(n>1) {
         #     c(
-        #       TwoRegression:::get_minute(timestamps[2:length(timestamps)],
+        #       get_minute(timestamps[2:length(timestamps)],
         #         rational = TRUE),
-              # TwoRegression:::get_minute(Sys.time(),
+              # get_minute(Sys.time(),
               #   rational = TRUE)
         #     )
         #   } else {
@@ -75,14 +75,14 @@ data_collection_program <- function(){
       as.numeric(diff.POSIXt(c(as.POSIXct(timestamps), finish)))
       # if (n > 1){
       #   (finish -
-      #       TwoRegression:::get_minute(timestamps,
+      #       get_minute(timestamps,
       #         rational = TRUE)) * 60
       # } else{
       # ''
       # }
 
     backup_timestamps <-
-      # TwoRegression:::get_minute(
+      # get_minute(
         ifelse(timestamps == '', auto_timestamps, timestamps)
         # rational = TRUE)
 
@@ -99,12 +99,12 @@ data_collection_program <- function(){
     #   abs((backup_finish - diff_s))#*60
 
     minofday <-
-      TwoRegression:::get_minute(
+      get_minute(
         ifelse(timestamps=='', auto_timestamps, timestamps),
         rational = TRUE)
 
     dayofyear <-
-      TwoRegression:::get_day_of_year(
+      get_day_of_year(
         ifelse(timestamps=='', auto_timestamps, timestamps))
 
     all_data <-
@@ -130,8 +130,7 @@ data_collection_program <- function(){
 #'
 #' This is the decision tree to pre-classify intensity.
 #' See the Figure at the end of Supplemental Document 3 from
-#' \href{
-#' http://links.lww.com/MSS/B103}{Hibbing et al.
+#' \href{http://links.lww.com/MSS/B103}{Hibbing et al.
 #' (2018, *Med Sci Sports Exerc*)}. NOTE: The link will download the document.
 #'
 #' @keywords internal
@@ -247,7 +246,8 @@ tree_intensity <- function(){
 #' \href{https://sites.google.com/site/compendiumofphysicalactivities/}{Compendium
 #' of Physical Activities} to Encode Direct Observation Intensities
 #'
-#' @param data A data frame outputted from \code{\link{data_collection_program}}
+#' @param obs_data A data frame outputted from
+#'   \code{\link{data_collection_program}}
 #'
 #' @return A data frame fully annotated with intensity values
 #' @export

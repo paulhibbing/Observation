@@ -27,3 +27,6 @@ NULL
 
 #' @import svDialogs
 NULL
+
+#' @importFrom stats sd
+NULL

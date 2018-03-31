@@ -285,7 +285,6 @@ compendium_reference <- function(obs_data){
 
     obs_data$Tree_Intensity <-
       gsub('Moderate', 'MVPA', obs_data$Tree_Intensity)
-        # ^^Move these to the actual program
 
     obs_data$Tree_Intensity <-
       gsub('Vigorous', 'MVPA', obs_data$Tree_Intensity)
@@ -367,7 +366,8 @@ compendium_reference <- function(obs_data){
     ### If all compendium possibilities are the same, set to that; otherwise, get help
     incorrect_entries <-
       comp_lookup(incorrect_entries,
-        Levels = levels)
+        Levels = levels,
+        compendium = compendium)
 
     ### Pull it all together
     incorrect_entries <-
@@ -406,12 +406,16 @@ compendium_reference <- function(obs_data){
 #'
 #' @param incorrect_entries A vector of activities that have not been correctly coded yet
 #' @param Levels A vector of intensity levels from which to select
+#' @param compendium A version compendium, passed from
+#'   \code{compendium_reference}, that has been modified to reflect the
+#'   intensity selections made in that function
 #'
 #' @keywords internal
 #'
-comp_lookup <- function(incorrect_entries, Levels){
+comp_lookup <- function(incorrect_entries, Levels, compendium){
   lapply(incorrect_entries,
     function(z){
+      # z <- incorrect_entries[[1]]
     keep <- 0
     if(nrow(z)>1) keep <- sd(as.numeric(z$Intensity))
     if(keep==0){
@@ -434,7 +438,7 @@ comp_lookup <- function(incorrect_entries, Levels){
       if(length(Activity)==0){
         qualifies <- sapply(compendium$Intensity,
           function(y) {
-            grepl(y, z$Tree_Intensity[1], ignore.case = T) |
+            grepl(y, z$Tree_Intensity[1], ignore.case = TRUE) |
             z$Tree_Intensity[1]=='Indeterminate'}
           )
 

@@ -1,4 +1,4 @@
-#' Collect direct observation data
+#' Interactively Collect Direct Observation Data
 #'
 #' @return A data frame of observation data
 #' @export
@@ -7,6 +7,9 @@
 #' \dontrun{
 #' data_collection_program()
 #' }
+#'
+#' @seealso
+#' [example_data]
 data_collection_program <- function(){
 
     # Initialize
@@ -235,16 +238,15 @@ tree_intensity <- function(){
         stringsAsFactors = F
       )
 
-    if (length(which(latest_description=='cancel'))!=0) {
-      latest_description[ ,match('cancel',
-        latest_description):length(latest_description)] <- NA
-    }
+    latest_description <- data.frame(
+      t(sapply(latest_description, function(x) gsub("cancel", NA, x)))
+    )
     return(latest_description)
   }
 
 #' Consult
 #' \href{https://sites.google.com/site/compendiumofphysicalactivities/}{Compendium
-#' of Physical Activities} to Encode Direct Observation Intensities
+#' of Physical Activities} to Interactively Encode Direct Observation Intensities
 #'
 #' @param obs_data A data frame outputted from
 #'   \code{\link{data_collection_program}}
@@ -253,7 +255,11 @@ tree_intensity <- function(){
 #' @export
 #'
 #' @examples
+#' data(example_data)
+#'
 #' \dontrun{
+#' compendium_reference(example_data)
+#'
 #' observation_data <- data_collection_program()
 #' compendium_reference(observation_data)
 #' }

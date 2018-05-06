@@ -5,9 +5,37 @@
 
 ## R CMD check results
 
-0 errors | 0 warnings | 1 note
+There were no ERRORs or WARNINGs.
 
-* This is a new release.
+There was 1 NOTE:
+
+* checking CRAN incoming feasibility ... NOTE
+Maintainer: 'Paul R. Hibbing <paulhibbing@gmail.com>'
+
+New submission
+
+Possibly mis-spelled words in DESCRIPTION:
+  Ellingson (9:51)
+  GJ (10:22)
+  Hibbing (9:39)
+  LD (9:61)
+  Welk (10:17)
+
+Found the following (possibly) invalid URLs:
+  URL: http://links.lww.com/MSS/B103
+    From: man/tree_intensity.Rd
+    Status: Error
+    Message: libcurl error code 6:
+      	Could not resolve host: links.lww.com
+  URL: https://github.com/paulhibbing/Observation/
+    From: inst/CITATION
+    Status: Error
+    Message: libcurl error code 6:
+      	Could not resolve host: github.com
+
+This is the first submission of `Observation`. The
+    "possibly mis-spelled words" are names and initials
+    from the cited work this package comes out of.
 
 ## Reverse dependencies
 

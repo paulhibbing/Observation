@@ -133,8 +133,8 @@ data_collection_program <- function(){
 #'
 #' This is the decision tree to pre-classify intensity.
 #' See the Figure at the end of Supplemental Document 3 from
-#' \href{http://links.lww.com/MSS/B103}{Hibbing et al.
-#' (2018, *Med Sci Sports Exerc*)}. NOTE: The link will download the document.
+#' \href{https://www.ncbi.nlm.nih.gov/pubmed/29135657}{Hibbing et al.
+#' (2018, *Med Sci Sports Exerc*)}.
 #'
 #' @keywords internal
 #'

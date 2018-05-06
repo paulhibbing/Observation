@@ -17,3 +17,5 @@ RoxygenNote: 6.0.1
 Suggests: knitr,
     rmarkdown
 VignetteBuilder: knitr
+URL: https://github.com/paulhibbing/Observation
+BugReports: https://github.com/paulhibbing/Observation/issues

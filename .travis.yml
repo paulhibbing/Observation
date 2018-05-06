@@ -3,3 +3,15 @@
 language: R
 sudo: false
 cache: packages
+r:
+  - oldrel
+  - release
+  - devel
+
+before_install:
+  - sudo apt-get install -y libsndfile1-dev
+  - sudo apt-get install -y libfftw3-dev
+env:
+  global:
+    - R_CHECK_ARGS="--no-build-vignettes --no-manual --as-cran rpack"
+    - R_BUILD_ARGS="--no-build-vignettes --no-manual rpack"

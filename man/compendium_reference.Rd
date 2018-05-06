@@ -4,7 +4,7 @@
 \alias{compendium_reference}
 \title{Consult
 \href{https://sites.google.com/site/compendiumofphysicalactivities/}{Compendium
-of Physical Activities} to Encode Direct Observation Intensities}
+of Physical Activities} to Interactively Encode Direct Observation Intensities}
 \usage{
 compendium_reference(obs_data)
 }
@@ -18,10 +18,14 @@ A data frame fully annotated with intensity values
 \description{
 Consult
 \href{https://sites.google.com/site/compendiumofphysicalactivities/}{Compendium
-of Physical Activities} to Encode Direct Observation Intensities
+of Physical Activities} to Interactively Encode Direct Observation Intensities
 }
 \examples{
+data(example_data)
+
 \dontrun{
+compendium_reference(example_data)
+
 observation_data <- data_collection_program()
 compendium_reference(observation_data)
 }

@@ -2,7 +2,7 @@
 % Please edit documentation in R/DO_Program_&Functions.R
 \name{data_collection_program}
 \alias{data_collection_program}
-\title{Collect direct observation data}
+\title{Interactively Collect Direct Observation Data}
 \usage{
 data_collection_program()
 }
@@ -10,10 +10,14 @@ data_collection_program()
 A data frame of observation data
 }
 \description{
-Collect direct observation data
+Interactively Collect Direct Observation Data
 }
 \examples{
 \dontrun{
 data_collection_program()
 }
+
+}
+\seealso{
+[example_data]
 }

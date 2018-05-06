@@ -1,11 +1,10 @@
 Package: Observation
 Type: Package
-Title: Collect and Process Direct Observation Data
+Title: Collect and Process Physical Activity Direct Observation Data
 Version: 0.1.0
 Authors@R: person(c("Paul", "R."), "Hibbing", email = "paulhibbing@gmail.com",
 		  role = c("aut","cre"))
 Depends: R (>= 2.10)
-Maintainer: The package maintainer <yourself@somewhere.net>
 Description: Two-part system for first collecting then managing direct
     observation data, as described by Hibbing PR, Ellingson LD,
     Dixon PM, & Welk GJ (2017) <doi:10.1249/MSS.0000000000001486>.
@@ -13,5 +12,7 @@ License: GPL-3 | file LICENSE
 Encoding: UTF-8
 LazyData: true
 Imports: svDialogs (>= 1.0.0)
-Remotes: SciViews/svDialogs
 RoxygenNote: 6.0.1
+Suggests: knitr,
+    rmarkdown
+VignetteBuilder: knitr

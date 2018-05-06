@@ -1,4 +1,4 @@
-#' Collect and Process Direct Observation Data
+#' Collect and Process Physical Activity Direct Observation Data
 #'
 #' This provides a free and easy way to document and annotate physical activity
 #' behaviors using direct observation

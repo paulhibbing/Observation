@@ -21,18 +21,6 @@ Possibly mis-spelled words in DESCRIPTION:
   LD (9:61)
   Welk (10:17)
 
-Found the following (possibly) invalid URLs:
-  URL: http://links.lww.com/MSS/B103
-    From: man/tree_intensity.Rd
-    Status: Error
-    Message: libcurl error code 6:
-      	Could not resolve host: links.lww.com
-  URL: https://github.com/paulhibbing/Observation/
-    From: inst/CITATION
-    Status: Error
-    Message: libcurl error code 6:
-      	Could not resolve host: github.com
-
 This is the first submission of `Observation`. The
     "possibly mis-spelled words" are names and initials
     from the cited work this package comes out of.

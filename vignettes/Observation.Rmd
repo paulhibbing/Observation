@@ -22,13 +22,17 @@ The purpose of `Observation` is to provide a free and easy-to-use tool for worki
 
 ## 2. Download and Installation
 
-### 2.1 R and RStudio
+### 2.1 A Critical Note
+
+The following sections provide basic instructions for installing software. For those who already have R and RStudio installed, please note that **having current versions of the applications is critical for the functionality of `Observation`**. If you experience issues with `Observation` (e.g. information is printed in the console, not dialog boxes), one or both applications may be out of date. It is recommended to first update RStudio to see if your issues resolve (go to `Help -> Check for Updates`). If you need to update R, the `installr` package has a useful `updateR` function to guide your installation.
+
+### 2.2 R and RStudio
 
 To use `Observation`, you must naturally have R installed, which you can download for free at https://www.r-project.org/. It is recommended to also download and install RStudio for free from [https://www.rstudio.com](https://www.rstudio.com/products/rstudio/download/).
 
 R is a programming language, whereas RStudio is an "integrated development environment." That is, RStudio includes additional functionality to streamline the way you use R.
 
-### 2.2 The Observation Package
+### 2.3 The Observation Package
 
 To install the `Observation` package, open Rstudio and type into the console (bottom left pane) `install.packages("Observation")`. Press enter to execute the command, and the package will be automatically installed.
 
@@ -58,6 +62,21 @@ library(Observation)
   # that name.
 
 my_data <- data_collection_program()
+
+# You can view your work with
+
+View(my_data)
+
+# There is also a sample data set you can examine with
+
+data(example_data, package = "Observation")
+View(example_data)
+
+# The format of "my_data" and "example_data" (and any other data
+# collected with data_collection_program()) will be the same. Information
+# about what each column represents is available with
+
+help(example_data, package = "Observation")
 
 # Once you are finished collecting data, you should save it to an external file.
 # There are a lot of options both for saving in different formats, and for

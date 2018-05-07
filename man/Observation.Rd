@@ -27,6 +27,9 @@ doi:10.1249/MSS.0000000000001486.
 
 \examples{
 \dontrun{
+data(example_data)
+compendium_reference(example_data)
+
 observation_data <- data_collection_program()
 full_data <- compendium_reference(observation_data)
 }

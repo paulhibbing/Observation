@@ -21,9 +21,9 @@ Consult
 of Physical Activities} to Interactively Encode Direct Observation Intensities
 }
 \examples{
-data(example_data)
 
 \dontrun{
+data(example_data)
 compendium_reference(example_data)
 
 observation_data <- data_collection_program()

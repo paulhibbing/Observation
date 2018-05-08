@@ -4,7 +4,7 @@
 \alias{comp_lookup}
 \title{Helper function for intensity coding process.}
 \usage{
-comp_lookup(incorrect_entries, Levels, compendium)
+comp_lookup(incorrect_entries, Levels, compendium, ...)
 }
 \arguments{
 \item{incorrect_entries}{A vector of activities that have not been correctly coded yet}
@@ -14,6 +14,8 @@ comp_lookup(incorrect_entries, Levels, compendium)
 \item{compendium}{A version compendium, passed from
 \code{compendium_reference}, that has been modified to reflect the
 intensity selections made in that function}
+
+\item{...}{Arguments passed to dialog functions}
 }
 \description{
 Interface for looking up Compendium values to assign an intensity to an

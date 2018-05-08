@@ -6,11 +6,13 @@
 \href{https://sites.google.com/site/compendiumofphysicalactivities/}{Compendium
 of Physical Activities} to Interactively Encode Direct Observation Intensities}
 \usage{
-compendium_reference(obs_data)
+compendium_reference(obs_data, ...)
 }
 \arguments{
 \item{obs_data}{A data frame outputted from
 \code{\link{data_collection_program}}}
+
+\item{...}{Arguments passed to dialog functions}
 }
 \value{
 A data frame fully annotated with intensity values

@@ -7,7 +7,7 @@
 \title{Collect and Process Physical Activity Direct Observation Data}
 \description{
 This provides a free and easy way to document and annotate physical activity
-behaviors using direct observation
+behaviors using direct observation.
 }
 \section{Core functions}{
 
@@ -27,6 +27,11 @@ doi:10.1249/MSS.0000000000001486.
 
 \examples{
 \dontrun{
+# Note: `Observation` functions accept further arguments that are passed to
+# functions from the `svDialogs` package. Doing so may improve your
+# experience using the `Observation` package. See the package vignette for
+# more information.
+
 data(example_data)
 compendium_reference(example_data)
 

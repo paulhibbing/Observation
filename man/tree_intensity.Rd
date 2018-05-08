@@ -4,7 +4,10 @@
 \alias{tree_intensity}
 \title{Pre-classify activity intensity}
 \usage{
-tree_intensity()
+tree_intensity(...)
+}
+\arguments{
+\item{...}{Arguments passed to dialog functions}
 }
 \description{
 This is the decision tree to pre-classify intensity.

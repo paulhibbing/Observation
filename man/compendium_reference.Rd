@@ -10,7 +10,7 @@ compendium_reference(obs_data, ...)
 }
 \arguments{
 \item{obs_data}{A data frame outputted from
-\code{\link{data_collection_program}}}
+\code{\link{data_collection_program_interactive}}}
 
 \item{...}{Arguments passed to dialog functions}
 }
@@ -24,11 +24,11 @@ of Physical Activities} to Interactively Encode Direct Observation Intensities
 }
 \examples{
 
-\dontrun{
+if (interactive()) {
 data(example_data)
 compendium_reference(example_data)
 
-observation_data <- data_collection_program()
+observation_data <- data_collection_program_interactive()
 compendium_reference(observation_data)
 }
 }

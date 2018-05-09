@@ -1,9 +1,17 @@
-## Test environments
+## Resubmission  
+This is a resubmission, which has incorporated the
+    following changes:  
+
+* Added functionality to support and test manual
+    equivalents of functions that were initially
+    only available interactively
+
+## Test environments  
 * local Windows 10 install, R 3.5.0
 * ubuntu 14.04.5 (on travis-ci), R 3.5.0
 * win-builder (devel and release)
 
-## R CMD check results
+## R CMD check results  
 
 There were no ERRORs or WARNINGs.
 
@@ -31,6 +39,7 @@ This is a new release, so there are no reverse dependencies.
 
 ## Other comments
 
-Examples are wrapped in \dontrun{} due to the need for user input.
+The package is largely interactive, so many examples are 
+    wrapped in `if (interactive()) ...`
 
 ---

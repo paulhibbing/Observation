@@ -5,6 +5,7 @@
 #' capabilities.
 #'
 #' @param interactive Logical. Should program be run interactively?
+#' @param ... Additional arguments passed to method-like functions (under "See Also" below)
 #'
 #' @export
 #' @note If `interactive = TRUE`, but R is not being used interactively, a
@@ -20,7 +21,7 @@
 #' }
 #'
 #' data_collection_program(interactive = FALSE)
-data_collection_program <- function(interactive = TRUE) {
+data_collection_program <- function(interactive = TRUE, ...) {
 
   if (all(!interactive(), interactive)) {
     message(

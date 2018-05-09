@@ -4,10 +4,12 @@
 \alias{data_collection_program}
 \title{Collect Direct Observation Data}
 \usage{
-data_collection_program(interactive = TRUE)
+data_collection_program(interactive = TRUE, ...)
 }
 \arguments{
 \item{interactive}{Logical. Should program be run interactively?}
+
+\item{...}{Additional arguments passed to method-like functions (under "See Also" below)}
 }
 \description{
 A generic-like function for collecting direct observation data manually or

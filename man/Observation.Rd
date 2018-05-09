@@ -26,7 +26,7 @@ doi:10.1249/MSS.0000000000001486.
 }
 
 \examples{
-\dontrun{
+if (interactive()) {
 # Note: `Observation` functions accept further arguments that are passed to
 # functions from the `svDialogs` package. Doing so may improve your
 # experience using the `Observation` package. See the package vignette for

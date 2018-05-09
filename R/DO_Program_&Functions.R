@@ -6,7 +6,7 @@
 #' @export
 #'
 #' @examples
-#' \dontrun{
+#' if (interactive()) {
 #' data_collection_program()
 #' }
 #'
@@ -271,7 +271,7 @@ tree_intensity <- function(...){
 #'
 #' @examples
 #'
-#' \dontrun{
+#' if (interactive()) {
 #' data(example_data)
 #' compendium_reference(example_data)
 #'

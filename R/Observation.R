@@ -10,7 +10,7 @@
 #' \code{\link{compendium_reference}}
 #'
 #' @examples
-#' \dontrun{
+#' if (interactive()) {
 #' # Note: `Observation` functions accept further arguments that are passed to
 #' # functions from the `svDialogs` package. Doing so may improve your
 #' # experience using the `Observation` package. See the package vignette for

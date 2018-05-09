@@ -25,11 +25,15 @@ of Physical Activities} to Encode Direct Observation Intensities
 \examples{
 
 if (interactive()) {
-data(example_data)
-compendium_reference_interactive(example_data)
 
-observation_data <- data_collection_program_interactive()
-compendium_reference_interactive(observation_data)
+# compendium_reference_interactive() is called within
+# compendium_reference() when `interactive = TRUE` and
+# the session is interactive
+data(example_data)
+compendium_reference(example_data)
+
+observation_data <- data_collection_program()
+compendium_reference(observation_data)
 }
 }
 \keyword{internal}

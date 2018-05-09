@@ -12,7 +12,4 @@ of Supplemental Document 3 from
 \href{https://www.ncbi.nlm.nih.gov/pubmed/29135657}{Hibbing et al. (2018,
 *Med Sci Sports Exerc*)}.
 }
-\examples{
-tree_intensity_manual
-}
 \keyword{internal}

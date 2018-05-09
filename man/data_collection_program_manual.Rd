@@ -10,6 +10,6 @@ data_collection_program_manual()
 Manually Collect Direct Observation Data
 }
 \examples{
-data_collection_program_manual()
+Observation:::data_collection_program_manual()
 }
 \keyword{internal}

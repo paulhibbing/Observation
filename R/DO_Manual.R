@@ -4,7 +4,7 @@
 #' @keywords internal
 #'
 #' @examples
-#' data_collection_program_manual()
+#' Observation:::data_collection_program_manual()
 data_collection_program_manual <- function() {
   return(NULL)
 }
@@ -19,8 +19,6 @@ data_collection_program_manual <- function() {
 #'
 #' @keywords internal
 #'
-#' @examples
-#' tree_intensity_manual
 tree_intensity_manual <- function(){
     return(NULL)
 }

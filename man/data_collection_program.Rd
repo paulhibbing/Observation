@@ -30,5 +30,6 @@ data_collection_program(interactive = FALSE)
 }
 \seealso{
 [data_collection_program_interactive()],
-    [data_collection_program_manual()]
+    [data_collection_program_manual()],
+    [example_data]
 }

@@ -56,7 +56,7 @@ data_collection_program_interactive <- function(...){
       if(length(new_activity)==0) new_activity   <- ''
       activities <- c(activities, new_activity)
 
-      descriptions <- rbind(descriptions, tree_intensity(...))
+      descriptions <- rbind(descriptions, tree_intensity_interactive(...))
 
       pauser <-
         dlgInput(
@@ -141,18 +141,18 @@ data_collection_program_interactive <- function(...){
 
 ### FUNCTIONS CALLED BY PROGRAM
 
-#' Pre-classify activity intensity
+#' Interactively Pre-Classify Activity Intensity
 #'
-#' This is the decision tree to pre-classify intensity.
-#' See the Figure at the end of Supplemental Document 3 from
-#' \href{https://www.ncbi.nlm.nih.gov/pubmed/29135657}{Hibbing et al.
-#' (2018, *Med Sci Sports Exerc*)}.
+#' Interactively implement the pre-classification decision tree described at the
+#' end of Supplemental Document 3 from
+#' \href{https://www.ncbi.nlm.nih.gov/pubmed/29135657}{Hibbing et al. (2018,
+#' *Med Sci Sports Exerc*)}.
 #'
 #' @inheritParams data_collection_program_interactive
 #'
 #' @keywords internal
 #'
-tree_intensity <- function(...){
+tree_intensity_interactive <- function(...){
 
     ## Initialize
     seated               <- 'cancel'
@@ -258,9 +258,9 @@ tree_intensity <- function(...){
     return(latest_description)
   }
 
-#' Consult
+#' Interactively Consult the
 #' \href{https://sites.google.com/site/compendiumofphysicalactivities/}{Compendium
-#' of Physical Activities} to Interactively Encode Direct Observation Intensities
+#' of Physical Activities} to Encode Direct Observation Intensities
 #'
 #' @param obs_data A data frame outputted from
 #'   \code{\link{data_collection_program_interactive}}
@@ -268,18 +268,18 @@ tree_intensity <- function(...){
 #' @inheritParams data_collection_program_interactive
 #'
 #' @return A data frame fully annotated with intensity values
-#' @export
+#' @keywords internal
 #'
 #' @examples
 #'
 #' if (interactive()) {
 #' data(example_data)
-#' compendium_reference(example_data)
+#' compendium_reference_interactive(example_data)
 #'
 #' observation_data <- data_collection_program_interactive()
-#' compendium_reference(observation_data)
+#' compendium_reference_interactive(observation_data)
 #' }
-compendium_reference <- function(obs_data, ...){
+compendium_reference_interactive <- function(obs_data, ...){
 
     agegroup_setting <-
       dlgMessage('Will you be coding for kids?', 'yesno', ...)$res
@@ -392,7 +392,7 @@ compendium_reference <- function(obs_data, ...){
     ### If all compendium possibilities are the same, set to that; otherwise,
     ### get help
     incorrect_entries <-
-      comp_lookup(incorrect_entries,
+      comp_lookup_interactive(incorrect_entries,
         Levels = levels,
         compendium = compendium,
         ...)
@@ -427,7 +427,7 @@ compendium_reference <- function(obs_data, ...){
   return(obs_data[order(obs_data$Auto_Timestamp),])
   }
 
-#' Helper function for intensity coding process.
+#' Helper Function for Interactive Intensity Coding Process.
 #'
 #' Interface for looking up Compendium values to assign an intensity to an
 #' activity.
@@ -435,13 +435,13 @@ compendium_reference <- function(obs_data, ...){
 #' @param incorrect_entries A vector of activities that have not been correctly coded yet
 #' @param Levels A vector of intensity levels from which to select
 #' @param compendium A version compendium, passed from
-#'   \code{compendium_reference}, that has been modified to reflect the
+#'   \code{compendium_reference_interactive}, that has been modified to reflect the
 #'   intensity selections made in that function
 #' @inheritParams data_collection_program_interactive
 #'
 #' @keywords internal
 #'
-comp_lookup <- function(incorrect_entries, Levels, compendium, ...){
+comp_lookup_interactive <- function(incorrect_entries, Levels, compendium, ...){
   lapply(incorrect_entries,
     function(z){
       # z <- incorrect_entries[[1]]

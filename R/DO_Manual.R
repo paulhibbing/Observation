@@ -1,28 +1,3 @@
-#' Manually Collect Direct Observation Data
-#'
-#'
-#' @keywords internal
-#'
-#' @examples
-#' Observation:::data_collection_program_manual()
-data_collection_program_manual <- function() {
-  return(NULL)
-}
-
-#' Manually Pre-Classify Activity Intensity
-#'
-#' Manually implement the pre-classification decision tree described at the end
-#' of Supplemental Document 3 from
-#' \href{https://www.ncbi.nlm.nih.gov/pubmed/29135657}{Hibbing et al. (2018,
-#' *Med Sci Sports Exerc*)}.
-#'
-#'
-#' @keywords internal
-#'
-tree_intensity_manual <- function(){
-    return(NULL)
-}
-
 #' Manually Consult the
 #' \href{https://sites.google.com/site/compendiumofphysicalactivities/}{Compendium
 #' of Physical Activities} to Encode Direct Observation Intensities

@@ -1,7 +1,7 @@
 #' Collect and Process Physical Activity Direct Observation Data
 #'
-#' This provides a free and easy way to document and annotate physical activity
-#' behaviors using direct observation.
+#' This provides a free and easy way to document and annotate physical
+#'     activity behaviors using direct observation.
 #'
 #' @section Core functions:
 #'

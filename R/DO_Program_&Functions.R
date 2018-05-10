@@ -136,6 +136,22 @@ data_collection_program_interactive <- function(...){
 
     all_data$id <- id
     all_data <- all_data[ ,c("id", setdiff(names(all_data), "id"))]
+
+    tree_names <- c("seated", "large_muscles_moving",
+      "slow", "slowed_by_resistance",
+      "ambulation", "light_walking")
+
+    tree_data <- all_data[ ,tree_names]
+    tree_data <-
+      do.call(data.frame,
+        sapply(tree_data, factor,
+          levels = c("yes", "no"), simplify = FALSE))
+    all_data[ ,tree_names] <- tree_data
+
+    for (var in names(all_data)) {
+      attr(all_data[ ,var], "names") <- NULL
+    }
+
     return(all_data)
     }
 

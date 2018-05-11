@@ -1,7 +1,9 @@
-#' Sample data collected with direct observation program.
+#' Sample data collected interactively with direct observation program.
 #'
-#' A data set assembled by running the direct observation program and entering a
-#' variety of activities.
+#' A data set assembled by running the interactive direct observation program
+#' and entering a variety of activities.
+#'
+#' @usage data(example_data, package = "Observation")
 #'
 #' @format A data frame with 10 rows and 15 variables:
 #' \describe{

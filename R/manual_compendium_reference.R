@@ -32,29 +32,44 @@
 #'   the suggested matches in \code{indeterminate} do not give a suitable
 #'   match.
 #'
+#' @examples
+#' data(example_data)
+#'
+#' example_data_processed <-
+#'  Observation:::compendium_reference(example_data, FALSE,
+#'    kids = "yes", mvpa = "yes")
+#'
+#' if (interactive()) {
+#'  View(example_data_processed$data)
+#'  View(example_data_processed$indeterminate[[1]])
+#'  View(example_data_processed$compendium)
+#' }
+#'
 #' @family processing functions
 #'
 #' @keywords internal
 manual_compendium_reference <- function(obs_data, kids = c("yes", "no"),
   mvpa = c("yes", "no")){
 
-  fun_call <- deparse(sys.call())
+  fun_call <- deparse(sys.call(sys.parent()))
 
-  if (!grepl("kids", fun_call)) {
+  if (!any(grepl("kids", fun_call))) {
     kids <- "yes"
     warning(
       paste("No value provided for argument `kids`.",
         "Defaulting to \"yes\".",
-        "\n  See help(Observation:::manual_compendium_reference) for more info.")
+        "\n  See help(Observation:::manual_compendium_reference)",
+        "for more info.")
     )
   }
 
-  if (!grepl("mvpa", fun_call)) {
+  if (!any(grepl("mvpa", fun_call))) {
     mvpa <- "yes"
     warning(
       paste("No value provided for argument `mvpa`.",
         "Defaulting to \"yes\".",
-        "\n  See help(Observation:::manual_compendium_reference) for more info.")
+        "\n  See help(Observation:::manual_compendium_reference)",
+        "for more info.")
     )
   }
 

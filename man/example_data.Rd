@@ -3,7 +3,7 @@
 \docType{data}
 \name{example_data}
 \alias{example_data}
-\title{Sample data collected with direct observation program.}
+\title{Sample data collected interactively with direct observation program.}
 \format{A data frame with 10 rows and 15 variables:
 \describe{
   \item{id}{The user-inputted identification code for the trial}
@@ -23,10 +23,10 @@
   \item{light_walking}{User-inputted response to the light-walking prompt}
 }}
 \usage{
-example_data
+data(example_data, package = "Observation")
 }
 \description{
-A data set assembled by running the direct observation program and entering a
-variety of activities.
+A data set assembled by running the interactive direct observation program
+and entering a variety of activities.
 }
 \keyword{datasets}

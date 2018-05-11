@@ -92,7 +92,7 @@ all.equal(example_data[ ,test_names],
     manual_data[ ,test_names])
 }
 \seealso{
-[example_data]
+\code{\link{example_data}}
 
 Other collection functions: \code{\link{interactive_data_collection_program}},
   \code{\link{manual_data_collection_program}}

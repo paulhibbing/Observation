@@ -9,18 +9,21 @@
 #'
 #' \code{\link{compendium_reference}}
 #'
+#' @note `Observation` functions accept further arguments that
+#'     are passed to functions from the `svDialogs` package. Doing so
+#'     may improve your experience using the `Observation` package. See
+#'     the package vignette for more information.
+#'
 #' @examples
-#' if (interactive()) {
-#' # Note: `Observation` functions accept further arguments that are passed to
-#' # functions from the `svDialogs` package. Doing so may improve your
-#' # experience using the `Observation` package. See the package vignette for
-#' # more information.
 #'
+#' # Example of non-interactive use
 #' data(example_data)
-#' compendium_reference(example_data)
+#' compendium_reference(example_data, FALSE, kids = "yes", mvpa = "yes")
 #'
-#' observation_data <- data_collection_program()
-#' full_data <- compendium_reference(observation_data)
+#' # Example of interactive use
+#' if (interactive()) {
+#'   observation_data <- data_collection_program()
+#'   full_data <- compendium_reference(observation_data)
 #' }
 #'
 #' @section Associated References:

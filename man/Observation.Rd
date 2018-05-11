@@ -9,6 +9,12 @@
 This provides a free and easy way to document and annotate physical
     activity behaviors using direct observation.
 }
+\note{
+`Observation` functions accept further arguments that
+    are passed to functions from the `svDialogs` package. Doing so
+    may improve your experience using the `Observation` package. See
+    the package vignette for more information.
+}
 \section{Core functions}{
 
 
@@ -26,17 +32,15 @@ doi:10.1249/MSS.0000000000001486.
 }
 
 \examples{
-if (interactive()) {
-# Note: `Observation` functions accept further arguments that are passed to
-# functions from the `svDialogs` package. Doing so may improve your
-# experience using the `Observation` package. See the package vignette for
-# more information.
 
+# Example of non-interactive use
 data(example_data)
-compendium_reference(example_data)
+compendium_reference(example_data, FALSE, kids = "yes", mvpa = "yes")
 
-observation_data <- data_collection_program()
-full_data <- compendium_reference(observation_data)
+# Example of interactive use
+if (interactive()) {
+  observation_data <- data_collection_program()
+  full_data <- compendium_reference(observation_data)
 }
 
 }

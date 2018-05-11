@@ -32,7 +32,7 @@ If `interactive = TRUE`, but R is not being used interactively, a
 \examples{
 data(example_data)
 
-compendium_reference(example_data, FALSE)
+compendium_reference(example_data, FALSE, kids = "yes", mvpa = "yes")
 if (interactive()) {
     compendium_reference(example_data)
 }

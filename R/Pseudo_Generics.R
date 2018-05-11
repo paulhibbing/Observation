@@ -12,7 +12,7 @@
 #'   message is issued and an override is implemented to set `interactive =
 #'   FALSE`.
 #'
-#' @seealso [example_data]
+#' @seealso \code{\link{example_data}}
 #'
 #' @family collection functions
 #'
@@ -120,7 +120,7 @@ data_collection_program <- function(interactive = TRUE, ...) {
 #' @examples
 #' data(example_data)
 #'
-#' compendium_reference(example_data, FALSE)
+#' compendium_reference(example_data, FALSE, kids = "yes", mvpa = "yes")
 #' if (interactive()) {
 #'     compendium_reference(example_data)
 #' }

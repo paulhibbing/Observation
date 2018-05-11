@@ -3,7 +3,6 @@
 #' A data set assembled by running the interactive direct observation program
 #' and entering a variety of activities.
 #'
-#' @usage data(example_data, package = "Observation")
 #'
 #' @format A data frame with 10 rows and 15 variables:
 #' \describe{

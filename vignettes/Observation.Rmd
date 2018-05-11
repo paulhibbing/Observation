@@ -18,7 +18,7 @@ knitr::opts_chunk$set(
 
 ## 1. Overview
 
-The purpose of `Observation` is to provide a free and easy-to-use tool for working with direct observation data in the realm of physical activity. The package has two parts, the first for collecting data, and the second for processing it. Each part has a major function associated with it (i.e., `data_collection_program` to collect data and `compendium_reference` to process). The method is presented in detail in the text and supplemental material of [Hibbing et al. (2018)](https://www.ncbi.nlm.nih.gov/pubmed/29135657). This vignette is designed to provide instructions for use to users who may not be familiar with R.
+The purpose of `Observation` is to provide a free and easy-to-use tool for working with direct observation data in the realm of physical activity. The package has two parts, the first for collecting data, and the second for processing it. Each part has a major function associated with it (i.e., `data_collection_program` to collect data and `compendium_reference` to process), and each major function is able to be used interatively or manually. The method is presented in detail in the text and supplemental material of [Hibbing et al. (2018)](https://www.ncbi.nlm.nih.gov/pubmed/29135657). This vignette is designed to provide instructions for use to users who may not be familiar with R, and focuses on interactive use of the package.
 
 ## 2. Download and Installation
 
@@ -109,7 +109,7 @@ write.csv(my_data_processed, file = "My Example_Processed.csv", row.names = FALS
 
 ### 3.2 A Second Critical Note
 
-`Observation` depends heavily on the `svDialogs` package, which generates dialog boxes. `svDialogs` is focused on providing functionality that works across operating systems and R interfaces, which sometimes means that default settings behave in a less-than-ideal way in a context like `Observation`. It should be possible to circumvent such issues, but an understanding of how both packages are structured is essential for doing so.
+When used interactively, `Observation` depends heavily on the `svDialogs` package, which generates dialog boxes. `svDialogs` is focused on providing functionality that works across operating systems and R interfaces, which sometimes means that default settings behave in a less-than-ideal way in a context like `Observation`. It should be possible to circumvent such issues, but an understanding of how both packages are structured is essential for doing so.
 
 `Observation` is set up to use the default settings of all the `svDialogs` functions it uses, which ensures a working outcome for all users. However, `Observation` also gives users the capability of experimenting with different `svDialogs` settings. The catch is that, in the current CRAN version of `svDialogs` (v 1.0.0), there are not really options to customize. To get those, you will have to work with development versions of `svDialogs` instead of the CRAN version, until the development versions are released. Fortunately this is easy to do. The safest bet is to run the following code.
 
@@ -117,16 +117,16 @@ write.csv(my_data_processed, file = "My Example_Processed.csv", row.names = FALS
 
 if (!"devtools" %in% installed.packages()) install.packages("devtools")
 
-devtools::install_github("paulhibbing/svDialogs")
-# ^ This installs my particular version/copy of `svDialogs`. My added features
-# may or may not be accepted into the official version, so installing my version
-# guarantees you'll at least be able to work with `Observation` the way I've
-# been developing it.
+devtools::install_github("SciViews/svDialogs")
+# ^ This installs the official development version, which has accepted some
+# specific changes I made to make using `Observation` more pleasant. As a
+# development version, it may be changing continually in ways that could
+# potentially affect `Observation`. If you're not pleased with the behavior
+# you're getting, you can try installing my personal copy, since I'm not
+# planning to continue contributing to development for `svDialogs`.
 
-# If you decide you want to install the official development version (again,
-# which may not have my features), use:
+# devtools::install_github("paulhibbing/svDialogs")
 
-# devtools::install_github("SciViews/svDialogs")
 ```
 
 Once you have a development version of `svDialogs` installed, you can adapt your usage of `Observation` code to hopefully improve your experience using the package, especially the `compendium_reference` function. In particular, I recommend trying the following.
@@ -139,7 +139,7 @@ compendium_reference(example_data, rstudio = FALSE)
 
 ```
 
-If you are using RStudio desktop, the above code (loosely) allows you to bypass RStudio's dialog boxes and access your system's instead. You can use the same option (`rstudio = FALSE`) in `data_collection_program` as well. It is possible that this will make things worse, so you can always go back to the default settings by taking out `rstudio = FALSE`. Development is active on this package, so you can post an issue on the [GitHub page](https://github.com/paulhibbing/Observation/issues), and new features can be added. Development is also open-source, so if you want to attempt implementing a new feature yourself, you can do so and submit a pull request to dialog about how it would enhance the package.
+If you are using RStudio desktop, the above code (loosely) allows you to bypass RStudio's dialog boxes and access your system's instead. You can use the same option (`rstudio = FALSE`) in `data_collection_program` as well. It is possible that this will make things worse, so you can always go back to the default settings by taking out `rstudio = FALSE`. Development is active on `Observation`, so you can post an issue on the [GitHub page](https://github.com/paulhibbing/Observation/issues), and new features can be added. Development is also open-source, so if you want to attempt implementing a new feature yourself, you can do so and submit a pull request to dialog about how it would enhance the package.
 
 ### 3.3 Additional Comments
 

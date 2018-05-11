@@ -35,8 +35,7 @@
 #' @examples
 #' data(example_data)
 #'
-#' example_data_processed <-
-#'  Observation:::compendium_reference(example_data, FALSE,
+#' example_data_processed <- compendium_reference(example_data, FALSE,
 #'    kids = "yes", mvpa = "yes")
 #'
 #' if (interactive()) {

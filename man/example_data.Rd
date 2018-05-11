@@ -23,7 +23,7 @@
   \item{light_walking}{User-inputted response to the light-walking prompt}
 }}
 \usage{
-data(example_data, package = "Observation")
+example_data
 }
 \description{
 A data set assembled by running the interactive direct observation program

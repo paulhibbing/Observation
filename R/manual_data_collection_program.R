@@ -21,7 +21,7 @@
 #' @family collection functions
 #' @keywords internal
 #'
-data_collection_program_manual <- function(id, timestamps, activities,
+manual_data_collection_program <- function(id, timestamps, activities,
   durations = NULL, seated = NA,
   large_muscles_moving = NA, slow = NA,
   slowed_by_resistance = NA, ambulation = NA,
@@ -62,7 +62,7 @@ data_collection_program_manual <- function(id, timestamps, activities,
       "slow", "slowed_by_resistance",
       "ambulation", "light_walking")
     descriptions <-
-      apply(all_data[ ,tree_names], 1, tree_intensity_manual)
+      apply(all_data[ ,tree_names], 1, manual_tree_intensity)
     all_data$Tree_Intensity <-
       factor(as.character(descriptions),
         levels = c("Sedentary", "Sedentary/Light",
@@ -101,9 +101,9 @@ data_collection_program_manual <- function(id, timestamps, activities,
 #'       "ambulation", "light_walking"),
 #'     "1"))
 #'
-#' Observation:::tree_intensity_manual(prompt_responses)
+#' Observation:::manual_tree_intensity(prompt_responses)
 #'
-tree_intensity_manual <- function(prompt_responses) {
+manual_tree_intensity <- function(prompt_responses) {
   # prompt_responses <-
   # apply(all_data[2 ,tree_names], 1, function(x) x)
 

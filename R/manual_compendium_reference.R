@@ -35,7 +35,7 @@
 #' @family processing functions
 #'
 #' @keywords internal
-compendium_reference_manual <- function(obs_data, kids = c("yes", "no"),
+manual_compendium_reference <- function(obs_data, kids = c("yes", "no"),
   mvpa = c("yes", "no")){
 
   fun_call <- deparse(sys.call())
@@ -45,7 +45,7 @@ compendium_reference_manual <- function(obs_data, kids = c("yes", "no"),
     warning(
       paste("No value provided for argument `kids`.",
         "Defaulting to \"yes\".",
-        "\n  See help(Observation:::compendium_reference_manual) for more info.")
+        "\n  See help(Observation:::manual_compendium_reference) for more info.")
     )
   }
 
@@ -54,7 +54,7 @@ compendium_reference_manual <- function(obs_data, kids = c("yes", "no"),
     warning(
       paste("No value provided for argument `mvpa`.",
         "Defaulting to \"yes\".",
-        "\n  See help(Observation:::compendium_reference_manual) for more info.")
+        "\n  See help(Observation:::manual_compendium_reference) for more info.")
     )
   }
 

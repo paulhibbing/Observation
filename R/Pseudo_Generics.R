@@ -91,9 +91,9 @@ data_collection_program <- function(interactive = TRUE, ...) {
   interactive <- check_interactive(interactive)
 
   observation <- if (interactive) {
-    data_collection_program_interactive(...)
+    interactive_data_collection_program(...)
   } else {
-    data_collection_program_manual(...)
+    manual_data_collection_program(...)
   }
 
   return(observation)
@@ -115,9 +115,6 @@ data_collection_program <- function(interactive = TRUE, ...) {
 #'   message is issued and an override is implemented to set `interactive =
 #'   FALSE`.
 #'
-#' @seealso [compendium_reference_interactive()],
-#'     [compendium_reference_manual()]
-#'
 #' @family processing functions
 #'
 #' @examples
@@ -133,9 +130,9 @@ compendium_reference <- function(obs_data, interactive = TRUE, ...){
   interactive <- check_interactive(interactive)
 
   obs_data <- if (interactive) {
-    compendium_reference_interactive(obs_data, ...)
+    interactive_compendium_reference(obs_data, ...)
   } else {
-    compendium_reference_manual(obs_data, ...)
+    manual_compendium_reference(obs_data, ...)
   }
 
   return(obs_data)

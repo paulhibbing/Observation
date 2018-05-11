@@ -12,9 +12,9 @@
 #'   message is issued and an override is implemented to set `interactive =
 #'   FALSE`.
 #'
-#' @seealso [data_collection_program_interactive()],
-#'     [data_collection_program_manual()],
-#'     [example_data]
+#' @seealso [example_data]
+#'
+#' @family collection functions
 #'
 #' @examples
 #' if (interactive()) {
@@ -117,6 +117,8 @@ data_collection_program <- function(interactive = TRUE, ...) {
 #'
 #' @seealso [compendium_reference_interactive()],
 #'     [compendium_reference_manual()]
+#'
+#' @family processing functions
 #'
 #' @examples
 #' data(example_data)

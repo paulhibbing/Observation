@@ -22,18 +22,23 @@ Interactively Consult the
 \href{https://sites.google.com/site/compendiumofphysicalactivities/}{Compendium
 of Physical Activities} to Encode Direct Observation Intensities
 }
+\note{
+\code{compendium_reference_interactive()} is called
+    within \code{\link{compendium_reference}} when
+    \code{interactive = TRUE} and the session is interactive.
+}
 \examples{
 
 if (interactive()) {
-
-# compendium_reference_interactive() is called within
-# compendium_reference() when `interactive = TRUE` and
-# the session is interactive
 data(example_data)
 compendium_reference(example_data)
 
 observation_data <- data_collection_program()
 compendium_reference(observation_data)
 }
+}
+\seealso{
+Other processing functions: \code{\link{compendium_reference_manual}},
+  \code{\link{compendium_reference}}
 }
 \keyword{internal}

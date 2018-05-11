@@ -10,8 +10,8 @@ tree_intensity_interactive(...)
 \item{...}{Arguments passed to dialog functions}
 }
 \description{
-Interactively implement the pre-classification decision tree described at the
-end of Supplemental Document 3 from
+Interactively implement the pre-classification decision tree
+    described at the end of Supplemental Document 3 from
 \href{https://www.ncbi.nlm.nih.gov/pubmed/29135657}{Hibbing et al. (2018,
 *Med Sci Sports Exerc*)}.
 }

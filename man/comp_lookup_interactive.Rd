@@ -11,9 +11,10 @@ comp_lookup_interactive(incorrect_entries, Levels, compendium, ...)
 
 \item{Levels}{A vector of intensity levels from which to select}
 
-\item{compendium}{A version compendium, passed from
-\code{compendium_reference_interactive}, that has been modified to reflect the
-intensity selections made in that function}
+\item{compendium}{A compendium version, passed from
+\code{\link{compendium_reference_interactive}}, that has
+been modified to reflect the intensity selections made in
+that function}
 
 \item{...}{Arguments passed to dialog functions}
 }

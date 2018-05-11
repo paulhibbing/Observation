@@ -18,6 +18,7 @@
 #'
 #' @note By default, activity duration is automatically calculated, which is accomplished via \code{\link[base]{diff.POSIXt}} and thus requires \code{n + 1} timestamps, where \code{n} is the number of activities. Alternatively, durations can be manually specified via the \code{durations} parameter, in which case only \code{n} timestamps are needed, corresponding to the onset of each activity.
 #'
+#' @family collection functions
 #' @keywords internal
 #'
 data_collection_program_manual <- function(id, timestamps, activities,

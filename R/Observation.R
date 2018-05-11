@@ -35,6 +35,3 @@ NULL
 
 #' @import svDialogs AGread
 NULL
-
-#' @importFrom stats sd
-NULL

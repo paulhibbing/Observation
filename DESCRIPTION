@@ -12,7 +12,8 @@ License: GPL-3 | file LICENSE
 Encoding: UTF-8
 LazyData: true
 Imports: svDialogs (>= 1.0.0),
-    AGread (>= 0.1.2)
+    AGread (>= 0.1.2),
+    stats
 RoxygenNote: 6.0.1
 Suggests: knitr,
     rmarkdown

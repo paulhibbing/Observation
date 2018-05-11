@@ -9,11 +9,11 @@ Status](https://travis-ci.org/paulhibbing/Observation.svg?branch=master)](https:
 -----
 
 [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/Observation)](https://cran.r-project.org/package=Observation)
-[![packageversion](https://img.shields.io/badge/Package%20version-0.1.0-orange.svg?style=flat-square)](commits/master)
+[![packageversion](https://img.shields.io/badge/Package%20version-0.2.0.9000-orange.svg?style=flat-square)](commits/master)
 
 -----
 
-[![Last-changedate](https://img.shields.io/badge/last%20change-2018--04--19-yellowgreen.svg)](/commits/master)
+[![Last-changedate](https://img.shields.io/badge/last%20change-2018--05--11-yellowgreen.svg)](/commits/master)
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 

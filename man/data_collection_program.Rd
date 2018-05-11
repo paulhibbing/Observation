@@ -94,6 +94,6 @@ all.equal(example_data[ ,test_names],
 \seealso{
 [example_data]
 
-Other collection functions: \code{\link{data_collection_program_interactive}},
-  \code{\link{data_collection_program_manual}}
+Other collection functions: \code{\link{interactive_data_collection_program}},
+  \code{\link{manual_data_collection_program}}
 }

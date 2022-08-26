@@ -18,7 +18,7 @@ knitr::opts_chunk$set(
 
 ## 1. Overview
 
-The purpose of `Observation` is to provide a free and easy-to-use tool for working with direct observation data in the realm of physical activity. The package has two parts, the first for collecting data, and the second for processing it. Each part has a major function associated with it (i.e., `data_collection_program` to collect data and `compendium_reference` to process), and each major function is able to be used interatively or manually. The method is presented in detail in the text and supplemental material of [Hibbing et al. (2018)](https://pubmed.ncbi.nlm.nih.gov/29135657/). This vignette is designed to provide instructions for use to users who may not be familiar with R, and focuses on interactive use of the package.
+The purpose of `Observation` is to provide a free and easy-to-use tool for working with direct observation data in the realm of physical activity. The package has two parts, the first for collecting data, and the second for processing it. Each part has a major function associated with it (i.e., `data_collection_program` to collect data and `compendium_reference` to process), and each major function is able to be used interactively or manually. The method is presented in detail in the text and supplemental material of [Hibbing et al. (2018)](https://pubmed.ncbi.nlm.nih.gov/29135657/). This vignette is designed to provide instructions for use to users who may not be familiar with R, and focuses on interactive use of the package.
 
 ## 2. Download and Installation
 
@@ -139,7 +139,7 @@ compendium_reference(example_data, rstudio = FALSE)
 
 ```
 
-If you are using RStudio desktop, the above code (loosely) allows you to bypass RStudio's dialog boxes and access your system's instead. You can use the same option (`rstudio = FALSE`) in `data_collection_program` as well. It is possible that this will make things worse, so you can always go back to the default settings by taking out `rstudio = FALSE`. Development is active on `Observation`, so you can post an issue on the [GitHub page](https://github.com/paulhibbing/Observation/issues), and new features can be added. Development is also open-source, so if you want to attempt implementing a new feature yourself, you can do so and submit a pull request to dialog about how it would enhance the package.
+If you are using RStudio desktop, the above code (loosely) allows you to bypass RStudio's dialog boxes and access your system's instead. You can use the same option (`rstudio = FALSE`) in `data_collection_program` as well. It is possible that this will make things worse, so you can always go back to the default settings by taking out `rstudio = FALSE`.
 
 ### 3.3 Additional Comments
 

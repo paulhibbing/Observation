@@ -3,7 +3,6 @@
 \docType{package}
 \name{Observation}
 \alias{Observation}
-\alias{Observation-package}
 \title{Collect and Process Physical Activity Direct Observation Data}
 \description{
 This provides a free and easy way to document and annotate physical

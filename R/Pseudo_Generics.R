@@ -69,23 +69,25 @@
 #'
 #' # Example of using the manual program ----------------------------------
 #'
-#' manual_data <- data_collection_program(interactive = FALSE,
-#'     id = id, timestamps = timestamps,
-#'     activities = activities, durations = durations,
-#'     seated = seated, large_muscles_moving = large_muscles_moving,
-#'     slow = slow, slowed_by_resistance = slowed_by_resistance,
-#'     ambulation = ambulation, light_walking = light_walking,
-#'     rational = TRUE, format = "%Y-%m-%d %H:%M:%S")
+#' manual_data <- data_collection_program(
+#'   interactive = FALSE, id = id, timestamps = timestamps,
+#'   activities = activities, durations = durations, seated = seated,
+#'   large_muscles_moving = large_muscles_moving, slow = slow,
+#'   slowed_by_resistance = slowed_by_resistance, ambulation = ambulation,
+#'   light_walking = light_walking
+#' )
 #'
 #' # Comparing output of interactive vs manual program --------------------
 #'
 #' test_names <- intersect(names(example_data), names(manual_data))
-#' test_names <- setdiff(names(test_names),
-#'     c("dayofyear", "minofday", "duration_s"))
+#' test_names <- setdiff(names(test_names), "duration_s")
 #'
-#' all.equal(example_data[ ,test_names],
-#'     manual_data[ ,test_names])
-
+#' all.equal(
+#'   example_data[ ,test_names],
+#'   manual_data[ ,test_names],
+#'   scale = 1,
+#'   tolerance = 5
+#' )
 data_collection_program <- function(interactive = TRUE, ...) {
 
   interactive <- check_interactive(interactive)

@@ -6,8 +6,11 @@
 \href{https://sites.google.com/site/compendiumofphysicalactivities/}{Compendium
 of Physical Activities}}
 \usage{
-manual_compendium_reference(obs_data, kids = c("yes", "no"), mvpa = c("yes",
-  "no"))
+manual_compendium_reference(
+  obs_data,
+  kids = c("yes", "no"),
+  mvpa = c("yes", "no")
+)
 }
 \arguments{
 \item{obs_data}{A data frame outputted from
@@ -60,7 +63,9 @@ if (interactive()) {
 
 }
 \seealso{
-Other processing functions: \code{\link{compendium_reference}},
-  \code{\link{interactive_compendium_reference}}
+Other processing functions: 
+\code{\link{compendium_reference}()},
+\code{\link{interactive_compendium_reference}()}
 }
+\concept{processing functions}
 \keyword{internal}

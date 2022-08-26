@@ -4,7 +4,8 @@
 \name{example_data}
 \alias{example_data}
 \title{Sample data collected interactively with direct observation program.}
-\format{A data frame with 10 rows and 15 variables:
+\format{
+A data frame with 10 rows and 15 variables:
 \describe{
   \item{id}{The user-inputted identification code for the trial}
   \item{User_Timestamp}{The user-inputted start time for the activity}
@@ -21,7 +22,8 @@
   \item{slowed_by_resistance}{User-inputted response to the slowed-by-resistance prompt}
   \item{ambulation}{User-inputted response to the ambulation prompt}
   \item{light_walking}{User-inputted response to the light-walking prompt}
-}}
+}
+}
 \usage{
 example_data
 }

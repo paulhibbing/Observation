@@ -36,5 +36,5 @@
 #' @name Observation
 NULL
 
-#' @import svDialogs AGread
+#' @import svDialogs
 NULL

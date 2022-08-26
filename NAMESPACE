@@ -2,5 +2,4 @@
 
 export(compendium_reference)
 export(data_collection_program)
-import(AGread)
 import(svDialogs)

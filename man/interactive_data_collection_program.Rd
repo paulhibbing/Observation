@@ -37,7 +37,9 @@ data_collection_program()
 \seealso{
 [example_data]
 
-Other collection functions: \code{\link{data_collection_program}},
-  \code{\link{manual_data_collection_program}}
+Other collection functions: 
+\code{\link{data_collection_program}()},
+\code{\link{manual_data_collection_program}()}
 }
+\concept{collection functions}
 \keyword{internal}

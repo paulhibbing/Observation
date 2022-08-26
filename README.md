@@ -1,9 +1,7 @@
 
 [![Project Status: Active ? The project has reached a stable, usable
 state and is being actively
-developed.](http://www.repostatus.org/badges/latest/active.svg)](http://www.repostatus.org/#active)
-[![Travis-CI Build
-Status](https://travis-ci.org/paulhibbing/Observation.svg?branch=master)](https://travis-ci.org/paulhibbing/Observation)
+developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/)
 [![License](https://img.shields.io/badge/license-GPL-blue.svg)](http://www.gnu.org/licenses/gpl-3.0.html)
 
 -----
@@ -13,7 +11,7 @@ Status](https://travis-ci.org/paulhibbing/Observation.svg?branch=master)](https:
 
 -----
 
-[![Last-changedate](https://img.shields.io/badge/last%20change-2018--05--11-yellowgreen.svg)](/commits/master)
+[![Last-changedate](https://img.shields.io/badge/last%20change-2022--08--26-yellowgreen.svg)](/commits/master)
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
@@ -43,7 +41,7 @@ observation_data <- data_collection_program()
 This will collect direct observation data as you direct. It will also
 pre-classify the intensity of each activity based on the decision tree
 described by [Hibbing et
-al.](https://www.ncbi.nlm.nih.gov/pubmed/29135657) You can then update
+al.](https://pubmed.ncbi.nlm.nih.gov/29135657/) You can then update
 the classification by cross-referencing the [Compendium of Physical
 Activities](https://sites.google.com/site/compendiumofphysicalactivities/)
 using the following:

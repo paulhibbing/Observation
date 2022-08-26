@@ -39,6 +39,8 @@ if (interactive()) {
 
 }
 \seealso{
-Other processing functions: \code{\link{interactive_compendium_reference}},
-  \code{\link{manual_compendium_reference}}
+Other processing functions: 
+\code{\link{interactive_compendium_reference}()},
+\code{\link{manual_compendium_reference}()}
 }
+\concept{processing functions}

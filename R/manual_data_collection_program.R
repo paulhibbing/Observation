@@ -10,8 +10,6 @@
 #' @param slowed_by_resistance Character vector giving yes/no/NA response for whether slow muscle contractions were slowed because of resistance
 #' @param ambulation Character vector giving yes/no/NA response for whether the each activity is ambulatory
 #' @param light_walking Character vector giving yes/no/NA response for whether ambulation was slow enough to be considered light activity instead of moderate or vigorous
-#' @param rational Logical: Should numeric minute of the day be given as a rational number (TRUE) or an integer (FALSE)
-#' @param ... Additional arguments passed to \code{\link[AGread]{get_minute}}
 #'
 #' @return A dataframe of pre-processed direct observation data generated
 #'     from minimal input
@@ -25,7 +23,7 @@ manual_data_collection_program <- function(id, timestamps, activities,
   durations = NULL, seated = NA,
   large_muscles_moving = NA, slow = NA,
   slowed_by_resistance = NA, ambulation = NA,
-  light_walking = NA, rational = TRUE, ...) {
+  light_walking = NA) {
 
 
     if (all(is.null(durations),
@@ -42,12 +40,6 @@ manual_data_collection_program <- function(id, timestamps, activities,
     all_data <- data.frame(
       id = id,
       Timestamp = timestamps[seq(activities)],
-      dayofyear =
-        AGread::get_day_of_year(timestamps[seq(activities)],
-          ...),
-      minofday =
-        AGread::get_minute(timestamps[seq(activities)],
-          ..., rational = rational),
       Activity = activities,
       duration_s = durations,
       Tree_Intensity = "Indeterminate",
@@ -81,7 +73,7 @@ manual_data_collection_program <- function(id, timestamps, activities,
 #' Manually Pre-Classify Activity Intensity
 #'
 #' Manually implement the pre-classification decision tree described
-#'     at the end of Supplemental Document 3 from \href{https://www.ncbi.nlm.nih.gov/pubmed/29135657}{Hibbing et al. (2018,
+#'     at the end of Supplemental Document 3 from \href{https://pubmed.ncbi.nlm.nih.gov/29135657/}{Hibbing et al. (2018,
 #' *Med Sci Sports Exerc*)}.
 #'
 #' @param prompt_responses A vector of responses to the decision tree prompts

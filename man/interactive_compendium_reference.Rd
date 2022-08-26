@@ -38,7 +38,9 @@ compendium_reference(observation_data)
 }
 }
 \seealso{
-Other processing functions: \code{\link{compendium_reference}},
-  \code{\link{manual_compendium_reference}}
+Other processing functions: 
+\code{\link{compendium_reference}()},
+\code{\link{manual_compendium_reference}()}
 }
+\concept{processing functions}
 \keyword{internal}

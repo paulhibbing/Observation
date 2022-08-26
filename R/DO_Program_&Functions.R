@@ -78,16 +78,6 @@ interactive_data_collection_program <- function(...){
 
       if(length(pauser)==0) {
         finish <- Sys.time()
-        #   if(n>1) {
-        #     c(
-        #       get_minute(timestamps[2:length(timestamps)],
-        #         rational = TRUE),
-              # get_minute(Sys.time(),
-              #   rational = TRUE)
-        #     )
-        #   } else {
-        #   ''
-        #   }
         break
       }
 
@@ -97,45 +87,17 @@ interactive_data_collection_program <- function(...){
 
     diff_s <-
       as.numeric(diff.POSIXt(c(as.POSIXct(timestamps), finish)))
-      # if (n > 1){
-      #   (finish -
-      #       get_minute(timestamps,
-      #         rational = TRUE)) * 60
-      # } else{
-      # ''
-      # }
 
-    backup_timestamps <-
-      # get_minute(
-        ifelse(timestamps == '', auto_timestamps, timestamps)
-        # rational = TRUE)
+    backup_timestamps <- ifelse(
+      timestamps == '', auto_timestamps, timestamps
+    )
 
     backup_diff_s <- ##Previously named backup_finish
       as.numeric(diff.POSIXt(c(as.POSIXct(backup_timestamps), finish)))
-      # if (n>1) {
-      # c(backup_timestamps[2:length(backup_timestamps)],
-      #   finish[length(finish)])
-      # } else {
-      #   ''
-      # }
-
-    # backup_diff_s <-
-    #   abs((backup_finish - diff_s))#*60
-
-    minofday <-
-      get_minute(
-        ifelse(timestamps=='', auto_timestamps, timestamps),
-        rational = TRUE)
-
-    dayofyear <-
-      get_day_of_year(
-        ifelse(timestamps=='', auto_timestamps, timestamps))
 
     all_data <-
       data.frame(User_Timestamp = timestamps,
         Auto_Timestamp = auto_timestamps,
-        dayofyear = dayofyear,
-        minofday = minofday,
         Activity = activities,
         duration_s = diff_s,
         auto_duration_s = backup_diff_s,
@@ -170,7 +132,7 @@ interactive_data_collection_program <- function(...){
 #'
 #' Interactively implement the pre-classification decision tree
 #'     described at the end of Supplemental Document 3 from
-#' \href{https://www.ncbi.nlm.nih.gov/pubmed/29135657}{Hibbing et al. (2018,
+#' \href{https://pubmed.ncbi.nlm.nih.gov/29135657/}{Hibbing et al. (2018,
 #' *Med Sci Sports Exerc*)}.
 #'
 #' @inheritParams interactive_data_collection_program

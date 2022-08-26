@@ -4,10 +4,18 @@
 \alias{manual_data_collection_program}
 \title{Manually Collect Direct Observation Data}
 \usage{
-manual_data_collection_program(id, timestamps, activities, durations = NULL,
-  seated = NA, large_muscles_moving = NA, slow = NA,
-  slowed_by_resistance = NA, ambulation = NA, light_walking = NA,
-  rational = TRUE, ...)
+manual_data_collection_program(
+  id,
+  timestamps,
+  activities,
+  durations = NULL,
+  seated = NA,
+  large_muscles_moving = NA,
+  slow = NA,
+  slowed_by_resistance = NA,
+  ambulation = NA,
+  light_walking = NA
+)
 }
 \arguments{
 \item{id}{Character scalar giving ID to assign to the trial}
@@ -29,10 +37,6 @@ manual_data_collection_program(id, timestamps, activities, durations = NULL,
 \item{ambulation}{Character vector giving yes/no/NA response for whether the each activity is ambulatory}
 
 \item{light_walking}{Character vector giving yes/no/NA response for whether ambulation was slow enough to be considered light activity instead of moderate or vigorous}
-
-\item{rational}{Logical: Should numeric minute of the day be given as a rational number (TRUE) or an integer (FALSE)}
-
-\item{...}{Additional arguments passed to \code{\link[AGread]{get_minute}}}
 }
 \value{
 A dataframe of pre-processed direct observation data generated
@@ -45,7 +49,9 @@ Manually Collect Direct Observation Data
 By default, activity duration is automatically calculated, which is accomplished via \code{\link[base]{diff.POSIXt}} and thus requires \code{n + 1} timestamps, where \code{n} is the number of activities. Alternatively, durations can be manually specified via the \code{durations} parameter, in which case only \code{n} timestamps are needed, corresponding to the onset of each activity.
 }
 \seealso{
-Other collection functions: \code{\link{data_collection_program}},
-  \code{\link{interactive_data_collection_program}}
+Other collection functions: 
+\code{\link{data_collection_program}()},
+\code{\link{interactive_data_collection_program}()}
 }
+\concept{collection functions}
 \keyword{internal}

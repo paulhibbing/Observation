@@ -12,6 +12,8 @@ upstream dependency on `binaryLogic`
   
 * Removed unnecessary startup message
 
+* Made minor changes to the package vignette
+
 
 
 # Observation 0.2.0  

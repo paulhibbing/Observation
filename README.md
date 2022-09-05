@@ -7,11 +7,7 @@ developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.re
 -----
 
 [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/Observation)](https://cran.r-project.org/package=Observation)
-[![packageversion](https://img.shields.io/badge/Package%20version-0.2.0.9000-orange.svg?style=flat-square)](commits/master)
 
------
-
-[![Last-changedate](https://img.shields.io/badge/last%20change-2022--08--26-yellowgreen.svg)](/commits/master)
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
